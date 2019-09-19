@@ -1,0 +1,58 @@
+{# yonetim/templates/index4.html #}
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 
+'ticket/static/css/screen.css' %}" />
+    </head>
+
+<p> click <a href="http://127.0.0.1:8000/automobiles/car/motorcycles/">here</a> for a list of motorcycles <br />
+click <a href="http://127.0.0.1:8000/automobiles/car/personownscars/">here</a> for a list of Car Owners <br />
+click <a href="http://127.0.0.1:8000/automobiles/car/personownsmotorcycles/">here</a> for a list of Motorcycle Owners <br />
+click <a href="http://127.0.0.1:8000/automobiles/">here</a> for a list of cars <br />
+
+ </p>
+
+<h3> here are all the people in our database </h3>
+
+    <body>
+        {% render_table person_list %}
+    </body>
+
+
+ <form action="{% url 'automobiles:person-entry'  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Create a Person entry here</button>
+        </form>
+
+
+    {% for person in person_list %}
+ 
+    <ul>
+ 
+    <li>
+        <h3> Person_ID:{{ person.user_id }}</h3>
+        
+           
+           <form action="{% url 'automobiles:person-update' person.id  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Update</button>
+        </form>
+ 
+ 
+    </li>
+ 
+ 
+    </ul>
+ 
+{% endfor %}
+ 
+
+
+
+</html>
+
+
+ 

@@ -1,0 +1,58 @@
+{# yonetim/templates/index3.html #}
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 
+'ticket/static/css/screen.css' %}" />
+    </head>
+
+<p> click <a href="http://127.0.0.1:8000/automobiles/car/motorcycles/">here</a> for a list of motorcycles <br />
+click <a href="http://127.0.0.1:8000/automobiles/">here</a> for a list of Cars <br />
+click <a href="http://127.0.0.1:8000/automobiles/car/personownsmotorcycles/">here</a> for a list of Motorcycle Owners <br />
+click <a href="http://127.0.0.1:8000/automobiles/car/person/">here</a> for a list of People in the system <br />
+
+ </p>
+
+<h3> here are all the car owners </h3>
+
+    <body>
+        {% render_table personownscar_list %}
+    </body>
+
+
+ <form action="{% url 'automobiles:personownscar-entry'  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Make a Car Owner entry here</button>
+        </form>
+
+
+    {% for personownscar in personownscar_list %}
+ 
+    <ul>
+ 
+    <li>
+        <h3> Car Owner ID:{{ personownscar.id }}</h3>
+        
+           
+           <form action="{% url 'automobiles:personownscar-update' personownscar.id  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Update</button>
+        </form>
+ 
+ 
+    </li>
+ 
+ 
+    </ul>
+ 
+{% endfor %}
+ 
+
+
+
+</html>
+
+
+ 

@@ -1,0 +1,6 @@
+# my.cnf
+[client]
+database = automdb
+user = testuser
+password = test123
+default-character-set = utf8
